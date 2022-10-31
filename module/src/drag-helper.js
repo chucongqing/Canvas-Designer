@@ -1,15 +1,20 @@
 import {
   is,
   context,
-  points,
   tempContext,
   canvas,
   find,
   setSelection,
+  globalCfg,
 } from "./common";
+
 import { drawHelper } from "./draw-helper";
 import {textHandler} from "./text-handler";
+import { arcHandler } from "./arc-handler";
+import {bezierHandler } from "./bezier-handler";
+import {quadraticHandler} from "./quadratic-handler";
 
+const { points } = globalCfg;
 var copiedStuff = [],
     isControlKeyPressed;
 
@@ -914,7 +919,8 @@ export function paste() {
     setSelection(find("drag-last-path"), "DragLastPath");
   } else {
     dragHelper.global.startingIndex = points.length;
-    points = points.concat(copiedStuff);
+    globalCfg.points = points(copiedStuff);
+    // points = points.concat(copiedStuff);
     setSelection(find("drag-all-paths"), "DragAllPaths");
   }
 }
