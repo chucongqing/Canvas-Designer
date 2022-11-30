@@ -4,13 +4,13 @@ import {drawHelper} from './draw-helper';
 export var zoomHandler = {
     scale: 1.0,
     lastZoomState: null,
-    up: function(e) {
+    up: function() {
         this.scale = this.lastZoomState !== 'up' ? 1 : this.scale;
         this.scale += .01;
         this.lastZoomState = 'up';
         this.apply();
     },
-    down: function(e) {
+    down: function() {
         this.scale = this.lastZoomState !== 'down' ? 1 : this.scale;
         this.scale -= .01;
         this.lastZoomState = 'down';

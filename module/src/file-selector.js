@@ -1,6 +1,5 @@
 
 export class FileSelector {
-
   constructor() {
     this.selectSingleFile = this.selectFile;
     this.selectMultipleFiles = function(callback) {

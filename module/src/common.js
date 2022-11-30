@@ -23,6 +23,20 @@ export var is = {
     }
 };
 
+var params = null
+
+export function getUrlParams() {
+  let r = /([^&=]+)=?([^&]*)/g;
+  let d = function(s) { return decodeURIComponent(s.replace(/\+/g, ' ')); };
+  var match, search = window.location.search;
+  match = r.exec(search.substring(1))
+  while (match) {
+    params[d(match[1])] = d(match[2]);
+    match = r.exec(search.substring(1))
+  }
+  return params;
+}
+
 export function addEvent(element, eventType, callback) {
     if (eventType.split(' ').length > 1) {
         var events = eventType.split(' ');
@@ -511,6 +525,7 @@ export var common = {
 };
 
 export function drawArrow(mx, my, lx, ly, options) {
+    console.log(options);
     function getOptions(opt) {
         opt = opt || {};
 
@@ -588,11 +603,12 @@ export function cutHex(h) {
 export function clone(obj) {
     if (obj === null || typeof(obj) !== 'object' || 'isActiveClone' in obj)
         return obj;
-
+    
+  var temp;
     if (obj instanceof Date)
-        var temp = new obj.constructor(); //or new Date(obj);
+        temp = new obj.constructor(); //or new Date(obj);
     else
-        var temp = obj.constructor();
+        temp = obj.constructor();
 
     for (var key in obj) {
         if (Object.prototype.hasOwnProperty.call(obj, key)) {
